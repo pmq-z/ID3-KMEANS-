@@ -1,0 +1,19 @@
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Cache de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos de datos locales (opcional: quita si quieres versionarlos)
+*.xlsx
+*.xls
+*.csv
+*.tsv
+
+# Sistema operativo / editor
+.DS_Store
+Thumbs.db
