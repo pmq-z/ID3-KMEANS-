@@ -1,6 +1,4 @@
-# =============
 #    K-Means
-# =============
 
 Implementation of the k-means algorithm for unsupervised clustering of numerical data, with a terminal interface.
 
