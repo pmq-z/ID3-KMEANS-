@@ -1,7 +1,6 @@
 # ID3 
 
-Implementación del algoritmo ID3 (Quinlan) para aprendizaje de árboles de
-decisión sobre datos categóricos, con interfaz de terminal.
+Implementation of the ID3 algorithm (Quinlan) for decision tree learning on categorical data, with a terminal interface.
 
 <!-- ============================================================= -->
 ```text
@@ -34,45 +33,37 @@ decisión sobre datos categóricos, con interfaz de terminal.
 <!-- ============================================================= -->
 
 
-## REQUISITOS
-
+## REQUREMENTS
 ```bash
 pip install pandas openpyxl
 ```
 
-Python 3.9+. Soporta `.xlsx`, `.xls`, `.csv`, `.tsv`.
+Python 3.9+. Soupports `.xlsx`, `.xls`, `.csv`, `.tsv`.
 
-## USO
-
+## USAGE
 ```bash
 python main.py
 ```
 
-El programa es interactivo y te guía por estos pasos:
+The program is interactive and guides you through these steps:
 
-1. Indica la ruta del dataset.
-2. Elige la fila que contiene los encabezados.
-3. Selecciona la **columna objetivo** (la clase a predecir).
-4. Si hay atributos numéricos, elige discretizarlos en rangos
-   (**ancho igual** o **cuantiles**) y cuántos.
-5. El programa muestra entropía, ganancia por atributo, el árbol y las reglas.
-6. Opcional: entra al **modo inferencia** para clasificar ejemplos nuevos
-   (en atributos discretizados puedes escribir el número crudo).
+  1. Provide the dataset path.
+  2. Choose the row containing the headers.
+  3. Select the target column (the class to predict).
+  4. If there are numerical attributes, choose to discretize them into ranges (equal width or quantiles) and specify how many.
+  5. The program displays entropy, information gain per attribute, the tree, and the extracted rules.
+  6. Optional: Enter inference mode to classify new examples (for discretized attributes, you can type the raw number).
 
-## COMO FUNCIONA?
-ID3 construye el árbol de forma recursiva eligiendo, en cada nodo, el atributo
-que maximiza la ganancia de información:
 
-  - **Entropía** `Ent(D) = -Σ p·log2(p)` — mide el desorden de la clasificación.
-  - **Ganancia** `Gain(D,A) = Ent(D) - Σ (|Dv|/|D|)·Ent(Dv)` — reducción de
-  entropía al partir por el atributo `A`.
-  - El atributo con mayor ganancia se vuelve nodo; se repite en cada rama hasta
-  que el subconjunto es puro, no quedan atributos o no hay ganancia útil.
+## HOW DOES IT WORK?
+ID3 builds the tree recursively by choosing, at each node, the attribute that maximizes information gain:
 
-Detalles de la implementación:
-  - Los valores faltantes se tratan como categoría propia (`?`), sin descartar filas.
-  - Cada nodo guarda su clase mayoritaria como respaldo (`NEWTYPE_KEY`) para
-  clasificar valores no vistos durante el entrenamiento.
-  - El árbol equivale a una **disyunción de reglas** `SI a=v ∧ ... ⇒ clase=X`,
-  que el programa extrae y muestra.
+  - Entropy $Ent(D) = -\sum p \cdot \log_2(p)$ — measures the disorder of the classification.
+  - Gain $Gain(D,A) = Ent(D) - \sum \left(\frac{\vert{}D_v\vert{}}{\vert{}D\vert{}}\right) \cdot Ent(D_v)$ — entropy reduction when splitting by attribute `A`.
+  - The attribute with the highest gain becomes a node; this is repeated on each branch until the subset is pure, no attributes remain, or there is no useful gain.
+
+Implementation details:
+  - Missing values are treated as their own category (`?`), without discarding rows.
+  - Each node saves its majority class as a fallback (`NEWTYPE_KEY`) to classify unseen values during testing/inference.
+  - The tree is equivalent to a **disjunction of rules** `IF a=v ∧ ... ⇒ class=X`, which the program extracts and displays.
 
